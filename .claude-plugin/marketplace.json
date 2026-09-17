@@ -59,7 +59,7 @@
     {
       "name": "little-canary",
       "description": "Blocks a Claude Code turn when a local Little Canary server rejects the submitted prompt.",
-      "version": "0.3.6",
+      "version": "0.3.7",
       "category": "security",
       "source": {
         "source": "git-subdir",
@@ -71,7 +71,7 @@
     {
       "name": "claude-trash-guard",
       "description": "Blocks permanent-delete shell commands in Claude Code and redirects agents to a recoverable trash workflow.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "category": "development",
       "source": {
         "source": "git-subdir",
@@ -83,7 +83,7 @@
     {
       "name": "agent-signage",
       "description": "A PreToolUse hook that reports actionable git-state facts before file operations.",
-      "version": "0.1.2",
+      "version": "0.2.1",
       "category": "development",
       "source": {
         "source": "git-subdir",
@@ -96,7 +96,7 @@
     {
       "name": "hermes-jailbench",
       "description": "Jailbreak regression benchmark for LLM endpoints with repeatable known-pattern attacks and deterministic scoring.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "category": "security",
       "source": {
         "source": "git-subdir",
