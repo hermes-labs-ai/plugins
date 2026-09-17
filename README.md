@@ -39,7 +39,7 @@ hermes-labs` refreshes the manifest from `main`.
 | `intent-verify` | 0.2.0 | Maps markdown acceptance items to explicit implementation evidence for advisory spec-drift checks — a skill plus `/intent-verify:check` and `/intent-verify:map` commands | [intent-verify](https://github.com/hermes-labs-ai/intent-verify) (repo root) |
 | `quick-gate-python` | 0.3.1 | Runs the deterministic `pygate` Python quality gate (Ruff, Pyright, pytest) from inside Claude Code and reads its `gate-result/v1` verdict | [quick-gate-python](https://github.com/hermes-labs-ai/quick-gate-python) (repo root) |
 | `quick-gate-js` | 0.3.0 | Runs the released `quick-gate` JS/TS quality gate (ESLint, TypeScript, build, Lighthouse) from inside Claude Code and reads its `gate-result/v1` verdict | [quick-gate-js](https://github.com/hermes-labs-ai/quick-gate-js) (repo root) |
-| `hermes-gate` | 0.1.4 | Receipt-bound completion rail: `SessionStart` injects the completion contract, `Stop` runs the cached fast gate advisory-only, `PreToolUse` denies a Bash commit/push/PR boundary command missing its matching receipt | [hermes-gate](https://github.com/hermes-labs-ai/hermes-gate) (`claude-plugin`) |
+| `hermes-gate` | 0.1.5 | Receipt-bound completion rail: `SessionStart` injects the completion contract, `Stop` runs the cached fast gate advisory-only, `PreToolUse` denies a Bash commit/push/PR boundary command missing its matching receipt | [hermes-gate](https://github.com/hermes-labs-ai/hermes-gate) (`claude-plugin`, `v0.1.5`) |
 
 ## What these have in common
 
