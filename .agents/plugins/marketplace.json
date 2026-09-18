@@ -1,0 +1,133 @@
+{
+  "name": "hermes-labs",
+  "interface": {
+    "displayName": "Hermes Labs"
+  },
+  "plugins": [
+    {
+      "name": "hermes-blind",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/hermes-labs-ai/hermes-blind.git",
+        "ref": "main",
+        "sha": "b14dacd5e8d2cbab6c25c6405388dac0414ad190",
+        "path": "claude-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "description": "Local recovery anchors for Claude Code and Codex sessions, plus evidence-gated evaluation prompts.",
+      "version": "0.3.0",
+      "repository": "https://github.com/hermes-labs-ai/hermes-blind"
+    },
+    {
+      "name": "lintlang",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/hermes-labs-ai/lintlang.git",
+        "ref": "main",
+        "sha": "4c06241630f5c5b9882e4ee607721ae57717d013",
+        "path": "integrations/claude-code"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development",
+      "description": "Runs the released LintLang CLI on demand as a portable audit skill, with a separate automatic post-edit hook for Claude Code.",
+      "version": "0.2.0",
+      "repository": "https://github.com/hermes-labs-ai/lintlang"
+    },
+    {
+      "name": "rule-audit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/rule-audit.git",
+        "ref": "main",
+        "sha": "bd5ef9e6ca8666756592a9350f4c4335a1174e67"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "description": "On-demand static analysis of AI system prompts for contradictions, coverage gaps, priority ambiguities, and meta-paradoxes.",
+      "version": "0.4.0",
+      "repository": "https://github.com/hermes-labs-ai/rule-audit"
+    },
+    {
+      "name": "hermes-jailbench",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/hermes-jailbench.git",
+        "ref": "main",
+        "sha": "ec933be5e4c9f8c07caa0c9f19b45a925067d655"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Security",
+      "description": "Jailbreak regression benchmark for LLM endpoints with repeatable known-pattern attacks and deterministic scoring.",
+      "version": "0.2.1",
+      "repository": "https://github.com/hermes-labs-ai/hermes-jailbench",
+      "homepage": "https://github.com/hermes-labs-ai/hermes-jailbench"
+    },
+    {
+      "name": "intent-verify",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/intent-verify.git",
+        "ref": "main",
+        "sha": "df29c2e1f2e400fdec0ad515332884a8c821bd15"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "description": "Maps markdown acceptance items to explicit implementation evidence for advisory spec-drift checks.",
+      "version": "0.2.0",
+      "repository": "https://github.com/hermes-labs-ai/intent-verify",
+      "homepage": "https://github.com/hermes-labs-ai/intent-verify"
+    },
+    {
+      "name": "quick-gate-python",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/quick-gate-python.git",
+        "ref": "main",
+        "sha": "2e2be2574a17b23870c9122d18b06e56a6a8434a"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "description": "Runs the deterministic pygate Python quality gate and reads its gate-result/v1 verdict.",
+      "version": "0.3.1",
+      "repository": "https://github.com/hermes-labs-ai/quick-gate-python",
+      "homepage": "https://github.com/hermes-labs-ai/quick-gate-python"
+    },
+    {
+      "name": "quick-gate-js",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/quick-gate-js.git",
+        "ref": "main",
+        "sha": "9d96cd9eb2506a7c3104d730b99d4f58d635a417"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "description": "Runs the released quick-gate JavaScript and TypeScript quality gate and reads its gate-result/v1 verdict.",
+      "version": "0.3.0",
+      "repository": "https://github.com/hermes-labs-ai/quick-gate-js",
+      "homepage": "https://github.com/hermes-labs-ai/quick-gate-js"
+    }
+  ]
+}

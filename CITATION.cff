@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use or reference this plugin marketplace, please cite it."
-title: "claude-plugins: Hermes Labs Plugin Marketplace for Claude Code"
+title: "plugins: Hermes Labs Multi-Host Plugin Catalog"
 type: software
 authors:
   - family-names: "Bosch Rodriguez"
@@ -8,17 +8,13 @@ authors:
     orcid: "https://orcid.org/0009-0005-4896-1112"
     affiliation: "Hermes Labs"
 license: "Apache-2.0"
-repository-code: "https://github.com/hermes-labs-ai/claude-plugins"
+repository-code: "https://github.com/hermes-labs-ai/plugins"
 abstract: >
-  claude-plugins is the Hermes Labs plugin marketplace manifest for Claude
-  Code, added with `/plugin marketplace add hermes-labs-ai/claude-plugins`.
-  It is a marketplace/metadata repository, not a standalone software tool:
-  it declares and points to seven separately maintained Hermes Labs plugins
-  (hermes-blind, lintlang, rule-audit, hermeneutic-gate, little-canary,
-  claude-trash-guard, agent-signage) via a validated marketplace.json, so
-  that Claude Code can discover and install them.
+  plugins is the canonical Hermes Labs distribution catalog for Claude Code,
+  Codex, and GitHub Copilot. It generates native marketplace manifests from
+  one catalog while plugin implementations remain in their product repos.
 keywords:
-  - "Claude Code"
+  - "agent plugins"
   - "plugin marketplace"
   - "AI agent tooling"
   - "developer tools"
