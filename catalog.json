@@ -25,10 +25,16 @@
       "source": {
         "path": "claude-plugin",
         "ref": "main",
-        "commit": "b14dacd5e8d2cbab6c25c6405388dac0414ad190"
+        "commit": "fe351480cc6dda8933154eaaa2986dd73d390075"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -38,16 +44,23 @@
     {
       "id": "lintlang",
       "description": "Runs the released LintLang CLI on demand as a portable audit skill, with a separate automatic post-edit hook for Claude Code.",
-      "version": "0.2.0",
+      "version": "0.1.2",
       "category": "development",
       "repository": "https://github.com/hermes-labs-ai/lintlang",
       "source": {
         "path": "integrations/claude-code",
         "ref": "main",
-        "commit": "4c06241630f5c5b9882e4ee607721ae57717d013"
+        "commit": "949a2b148da5ca5b7e835838b511d3648d77769e"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "hook"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "listed-unverified",
@@ -65,8 +78,15 @@
         "ref": "main",
         "commit": "bd5ef9e6ca8666756592a9350f4c4335a1174e67"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "command"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "command"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -84,8 +104,12 @@
         "ref": "main",
         "commit": "7266a47d2ad6985c2dabf52207fae0ce42fbe0c3"
       },
-      "targets": ["claude"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -103,8 +127,13 @@
         "ref": "main",
         "commit": "6db9a0ace8083b32200365f67d2ce4c600241e47"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -120,10 +149,15 @@
       "source": {
         "path": "integrations/claude",
         "ref": "main",
-        "commit": "f79555a1a66197a5547d94defafca1b998a8bcd9"
+        "commit": "284b128add086cdfadd0e4a19919da4b75253eb6"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -140,10 +174,15 @@
       "source": {
         "path": "claude-plugin",
         "ref": "main",
-        "commit": "74e7eb623d4e6b0d5fb16163cbfa8d2ec936356b"
+        "commit": "7cf8c0b440eff548c8d378313981475e5e89e902"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -162,8 +201,14 @@
         "ref": "main",
         "commit": "ec933be5e4c9f8c07caa0c9f19b45a925067d655"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "listed-unverified",
@@ -180,10 +225,16 @@
       "source": {
         "path": ".",
         "ref": "main",
-        "commit": "398b518d5cedc9a27cf5d57b6e13eb8dc5e72af9"
+        "commit": "ad44e09f619ae180c87c016ed89fb487285a07db"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["command", "hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "command",
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -202,8 +253,15 @@
         "ref": "main",
         "commit": "df29c2e1f2e400fdec0ad515332884a8c821bd15"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "command"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "command"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -222,8 +280,14 @@
         "ref": "main",
         "commit": "2e2be2574a17b23870c9122d18b06e56a6a8434a"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -242,8 +306,14 @@
         "ref": "main",
         "commit": "9d96cd9eb2506a7c3104d730b99d4f58d635a417"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -262,8 +332,13 @@
         "ref": "v0.1.6",
         "commit": "a09df80d762d866542dc4de4816307e0b952b375"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
