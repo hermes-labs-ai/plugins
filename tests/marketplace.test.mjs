@@ -1,7 +1,8 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { access } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
@@ -62,6 +63,28 @@ test('the generator is byte-for-byte deterministic', () => {
   const before = paths.map(digest);
   execFileSync(process.execPath, [resolve(root, 'scripts/generate.mjs')], { cwd: root });
   assert.deepEqual(paths.map(digest), before);
+});
+
+test('the historical Copilot feed is generated from the same catalog', () => {
+  const temporary = mkdtempSync(resolve(tmpdir(), 'hermes-compat-'));
+  const output = resolve(temporary, '.claude-plugin/marketplace.json');
+  try {
+    execFileSync(process.execPath, [
+      resolve(root, 'scripts/generate.mjs'),
+      '--only-compat',
+      '--compat-output',
+      output,
+    ], { cwd: root });
+    const compatibility = JSON.parse(readFileSync(output, 'utf8'));
+    assert.equal(compatibility.name, 'hermes-labs-copilot');
+    assert.deepEqual(
+      compatibility.plugins.map((plugin) => plugin.name),
+      copilot.plugins.map((plugin) => plugin.name),
+    );
+    assert.equal(compatibility.plugins[0].source.source, 'git-subdir');
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
 });
 
 test('Codex entries include required policy metadata and only supported Git sources', () => {

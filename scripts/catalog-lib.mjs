@@ -53,3 +53,7 @@ export function titleCategory(category) {
 export async function writeGenerated(relativePath, value) {
   await writeFile(resolve(root, relativePath), json(value));
 }
+
+export async function writeJsonFile(path, value) {
+  await writeFile(resolve(path), json(value));
+}
