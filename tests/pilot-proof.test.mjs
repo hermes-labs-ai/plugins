@@ -17,7 +17,9 @@ test('the receipt describes a restored run of the current catalog', () => {
   assert.equal(receipt.host, 'claude');
   assert.equal(receipt.marketplace.ref, 'hermes-labs-ai/plugins');
   assert.match(receipt.marketplace.commit, /^[0-9a-f]{40}$/);
-  assert.equal(receipt.marketplace.resolvedRef, `https://github.com/hermes-labs-ai/plugins.git#${receipt.marketplace.commit}`);
+  assert.equal(typeof receipt.marketplace.sourceRef, 'string');
+  assert.ok(receipt.marketplace.sourceRef.length > 0);
+  assert.equal(receipt.marketplace.resolvedRef, `${receipt.marketplace.ref}@${receipt.marketplace.sourceRef}`);
   assert.equal(receipt.marketplace.transport, 'https');
   assert.equal(receipt.marketplace.preexisting, false);
   assert.equal(receipt.restored, true, 'a run that dirtied the host is not admissible evidence');

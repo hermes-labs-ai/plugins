@@ -78,10 +78,11 @@ tell you what a host actually loads. The pilot proof pack supplies that half:
 node scripts/pilot-proof.mjs --host claude
 ```
 
-For every entry targeting the host it adds this marketplace over public HTTPS
-at the exact pushed commit being certified, installs the entry, reads back the
-component inventory the host loaded, compares it against the declared
-capabilities, uninstalls, and finally restores the marketplace and plugin list
+For every entry targeting the host it adds the pushed marketplace branch over
+public HTTPS, verifies the cloned marketplace HEAD is the exact commit being
+certified, installs the entry, reads back the component inventory the host
+loaded, compares it against the declared capabilities, uninstalls, and finally
+restores the marketplace and plugin list
 to their pre-run state. Certification refuses to start if the `hermes-labs`
 marketplace or any target plugin is already present, and it refuses to replace
 the canonical receipt unless the full run passes with successful state reads,
@@ -143,8 +144,8 @@ verifier is offline and fails if generated files drift from the catalog.
 3. Run `npm run generate`.
 4. Commit and push the catalog plus generated marketplace manifests, then
    re-run `node scripts/pilot-proof.mjs --host claude` when the entry claims a
-   `verified` host, so Claude installs the exact pushed marketplace commit and
-   the receipt covers the new plugin pin.
+   `verified` host. The runner adds the pushed branch and refuses certification
+   unless Claude's local marketplace clone resolves to that exact commit.
 5. Run the checks above.
 6. Commit `catalog.json`, all three generated manifests, and any updated
    receipt together.

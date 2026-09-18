@@ -30,7 +30,6 @@ import { json, readCatalog, root } from './catalog-lib.mjs';
 import { evaluate, namesFrom, parseInventory, stripAnsi } from './pilot-proof-lib.mjs';
 
 const SUPPORTED_HOSTS = new Set(['claude']);
-const MARKETPLACE_REPOSITORY = 'https://github.com/hermes-labs-ai/plugins.git';
 const MARKETPLACE_NAME = 'hermes-labs';
 const MARKETPLACE_ID = 'hermes-labs-ai/plugins';
 
@@ -105,7 +104,15 @@ if (gitHead.status !== 0 || !/^[0-9a-f]{40}$/.test(marketplaceCommit)) {
   console.error(`could not resolve repository HEAD: ${gitHead.stderr || gitHead.stdout}`);
   process.exit(1);
 }
-const marketplaceRef = `${MARKETPLACE_REPOSITORY}#${marketplaceCommit}`;
+const branchResult = spawnSync('git', ['branch', '--show-current'], { cwd: root, encoding: 'utf8' });
+const marketplaceGitRef = flag('marketplace-ref')
+  ?? process.env.GITHUB_HEAD_REF
+  ?? (branchResult.status === 0 ? branchResult.stdout.trim() : '');
+if (!marketplaceGitRef) {
+  console.error('could not resolve a pushed branch/tag for marketplace certification; pass --marketplace-ref <ref>');
+  process.exit(1);
+}
+const marketplaceRef = `${MARKETPLACE_ID}@${marketplaceGitRef}`;
 
 const sourceState = spawnSync(
   'git',
@@ -178,10 +185,10 @@ try {
     throw new Error(`marketplace source readback was not valid JSON: ${error.message}`);
   }
   if (!configured) throw new Error(`marketplace source readback omitted ${MARKETPLACE_NAME}`);
-  if (configured.url !== MARKETPLACE_REPOSITORY) {
-    throw new Error(`marketplace source mismatch: ${configured.url ?? configured.repo ?? configured.source}`);
+  if (configured.repo !== MARKETPLACE_ID) {
+    throw new Error(`marketplace source mismatch: ${configured.repo ?? configured.url ?? configured.source}`);
   }
-  if (configured.ref !== marketplaceCommit) {
+  if (configured.ref !== marketplaceGitRef) {
     throw new Error(`marketplace ref mismatch: ${configured.ref ?? '(none)'}`);
   }
   const clonedHead = spawnSync('git', ['-C', configured.installLocation, 'rev-parse', 'HEAD'], { encoding: 'utf8' });
@@ -260,6 +267,7 @@ const receipt = {
   marketplace: {
     ref: MARKETPLACE_ID,
     resolvedRef: marketplaceRef,
+    sourceRef: marketplaceGitRef,
     commit: marketplaceCommit,
     name: MARKETPLACE_NAME,
     transport: 'https',

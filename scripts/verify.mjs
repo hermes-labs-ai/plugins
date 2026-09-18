@@ -91,7 +91,8 @@ for (const host of CERTIFIED_HOSTS) {
   check(receipt.catalogVersion === catalog.catalog.version, `${receiptPath}: catalog version ${receipt.catalogVersion} does not match ${catalog.catalog.version}`);
   check(receipt.marketplace?.ref === 'hermes-labs-ai/plugins', `${receiptPath}: unexpected marketplace ref ${receipt.marketplace?.ref}`);
   check(/^[0-9a-f]{40}$/.test(receipt.marketplace?.commit ?? ''), `${receiptPath}: marketplace commit must be a full SHA`);
-  check(receipt.marketplace?.resolvedRef === `https://github.com/hermes-labs-ai/plugins.git#${receipt.marketplace?.commit}`, `${receiptPath}: marketplace resolvedRef does not match its commit`);
+  check(typeof receipt.marketplace?.sourceRef === 'string' && receipt.marketplace.sourceRef.length > 0, `${receiptPath}: marketplace sourceRef is missing`);
+  check(receipt.marketplace?.resolvedRef === `${receipt.marketplace?.ref}@${receipt.marketplace?.sourceRef}`, `${receiptPath}: marketplace resolvedRef does not match its source ref`);
   check(receipt.marketplace?.preexisting === false, `${receiptPath}: certification must start without a pre-existing Hermes marketplace`);
   check(receipt.restored === true, `${receiptPath}: run did not restore host state, so its evidence is not trustworthy`);
   check(Array.isArray(receipt.steps) && receipt.steps.length > 0, `${receiptPath}: command evidence is missing`);
