@@ -167,6 +167,29 @@ try {
     throw new Error('marketplace was not fetched over public HTTPS');
   }
 
+  const listed = capture(run(['plugin', 'marketplace', 'list', '--json']));
+  if (listed.status !== 0) throw new Error(`marketplace source readback failed: ${listed.stderr || listed.stdout}`);
+  let configured;
+  try {
+    const parsed = JSON.parse(listed.stdout);
+    const entries = Array.isArray(parsed) ? parsed : parsed.marketplaces;
+    configured = entries?.find((entry) => entry.name === MARKETPLACE_NAME);
+  } catch (error) {
+    throw new Error(`marketplace source readback was not valid JSON: ${error.message}`);
+  }
+  if (!configured) throw new Error(`marketplace source readback omitted ${MARKETPLACE_NAME}`);
+  if (configured.url !== MARKETPLACE_REPOSITORY) {
+    throw new Error(`marketplace source mismatch: ${configured.url ?? configured.repo ?? configured.source}`);
+  }
+  if (configured.ref !== marketplaceCommit) {
+    throw new Error(`marketplace ref mismatch: ${configured.ref ?? '(none)'}`);
+  }
+  const clonedHead = spawnSync('git', ['-C', configured.installLocation, 'rev-parse', 'HEAD'], { encoding: 'utf8' });
+  const clonedCommit = (clonedHead.stdout ?? '').trim();
+  if (clonedHead.status !== 0 || clonedCommit !== marketplaceCommit) {
+    throw new Error(`marketplace clone resolved to ${clonedCommit || '(unknown)'}, expected ${marketplaceCommit}`);
+  }
+
   for (const plugin of targets) {
     const reference = `${plugin.id}@${MARKETPLACE_NAME}`;
     const installed = capture(run(['plugin', 'install', reference]));
