@@ -16,7 +16,10 @@ test('the receipt describes a restored run of the current catalog', () => {
   assert.equal(receipt.kind, 'pilot-proof');
   assert.equal(receipt.host, 'claude');
   assert.equal(receipt.marketplace.ref, 'hermes-labs-ai/plugins');
+  assert.match(receipt.marketplace.commit, /^[0-9a-f]{40}$/);
+  assert.equal(receipt.marketplace.resolvedRef, `https://github.com/hermes-labs-ai/plugins.git#${receipt.marketplace.commit}`);
   assert.equal(receipt.marketplace.transport, 'https');
+  assert.equal(receipt.marketplace.preexisting, false);
   assert.equal(receipt.restored, true, 'a run that dirtied the host is not admissible evidence');
 });
 
@@ -51,8 +54,10 @@ test('each result checks the declared capabilities against observed runtime stat
     for (const capability of ['command', 'hook', 'mcp', 'skill']) {
       assert.ok(checked.has(capability), `${result.id}: ${capability} baseline check missing`);
     }
+    assert.ok(result.checks.length > 0, `${result.id}: no certification checks`);
     for (const check of result.checks) {
       assert.equal(check.declared, plugin.capabilities.includes(check.capability), `${result.id}/${check.capability}`);
+      assert.equal(check.status, 'pass', `${result.id}/${check.capability}`);
     }
   }
 });
