@@ -62,13 +62,13 @@
     {
       "name": "little-canary",
       "description": "Screens inbound prompts through a local Little Canary service before the host sends them to the main model.",
-      "version": "0.3.7",
+      "version": "0.3.8",
       "category": "security",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/hermes-labs-ai/little-canary.git",
-        "ref": "main",
-        "sha": "6db9a0ace8083b32200365f67d2ce4c600241e47",
+        "ref": "v0.3.8",
+        "sha": "3851078663b49b751c2cd246ca57eb89d534dc37",
         "path": "plugins/claude-code"
       }
     },
@@ -167,13 +167,13 @@
     {
       "name": "hermes-gate",
       "description": "Receipt-bound completion rail with session-start guidance, advisory cached checks, and boundary enforcement.",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "category": "developer-tools",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/hermes-labs-ai/hermes-gate.git",
-        "ref": "v0.1.6",
-        "sha": "a09df80d762d866542dc4de4816307e0b952b375",
+        "ref": "v0.1.7",
+        "sha": "3c2c17157a03da65ff8af5d60300e1e10957594c",
         "path": "claude-plugin"
       },
       "homepage": "https://github.com/hermes-labs-ai/hermes-gate"
