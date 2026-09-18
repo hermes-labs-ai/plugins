@@ -86,8 +86,20 @@ for (const host of CERTIFIED_HOSTS) {
   }
 
   check(receipt.schemaVersion === 1, `${receiptPath}: unsupported schemaVersion`);
+  check(receipt.kind === 'pilot-proof', `${receiptPath}: unexpected receipt kind ${receipt.kind}`);
   check(receipt.host === host, `${receiptPath}: receipt host is ${receipt.host}`);
+  check(receipt.catalogVersion === catalog.catalog.version, `${receiptPath}: catalog version ${receipt.catalogVersion} does not match ${catalog.catalog.version}`);
+  check(receipt.marketplace?.ref === 'hermes-labs-ai/plugins', `${receiptPath}: unexpected marketplace ref ${receipt.marketplace?.ref}`);
+  check(/^[0-9a-f]{40}$/.test(receipt.marketplace?.commit ?? ''), `${receiptPath}: marketplace commit must be a full SHA`);
+  check(receipt.marketplace?.resolvedRef === `https://github.com/hermes-labs-ai/plugins.git#${receipt.marketplace?.commit}`, `${receiptPath}: marketplace resolvedRef does not match its commit`);
+  check(receipt.marketplace?.preexisting === false, `${receiptPath}: certification must start without a pre-existing Hermes marketplace`);
   check(receipt.restored === true, `${receiptPath}: run did not restore host state, so its evidence is not trustworthy`);
+  check(Array.isArray(receipt.steps) && receipt.steps.length > 0, `${receiptPath}: command evidence is missing`);
+  if (Array.isArray(receipt.steps)) {
+    for (const step of receipt.steps) {
+      check(step.status === 0, `${receiptPath}: command failed: ${step.command}`);
+    }
+  }
 
   const byId = new Map((receipt.results ?? []).map((result) => [result.id, result]));
   for (const plugin of catalog.plugins) {
@@ -98,6 +110,19 @@ for (const host of CERTIFIED_HOSTS) {
       continue;
     }
     check(result.verdict === 'pass', `${plugin.id}: ${host} certification verdict is ${result.verdict}`);
+    check(result.lifecycle?.install === 0, `${plugin.id}: install lifecycle status is ${result.lifecycle?.install}`);
+    check(result.lifecycle?.details === 0, `${plugin.id}: details lifecycle status is ${result.lifecycle?.details}`);
+    check(result.lifecycle?.uninstall === 0, `${plugin.id}: uninstall lifecycle status is ${result.lifecycle?.uninstall}`);
+    check(Array.isArray(result.checks) && result.checks.length > 0, `${plugin.id}: certification checks are missing`);
+    if (Array.isArray(result.checks)) {
+      for (const evidenceCheck of result.checks) {
+        check(evidenceCheck.status === 'pass', `${plugin.id}: ${evidenceCheck.capability ?? 'unknown'} check is ${evidenceCheck.status}`);
+      }
+    }
+    check(
+      json(result.declared) === json(plugin.capabilities),
+      `${plugin.id}: certified capabilities do not match the catalog`,
+    );
     check(
       result.source?.commit === plugin.source.commit,
       `${plugin.id}: certified commit ${result.source?.commit} does not match pinned ${plugin.source.commit}; re-run scripts/pilot-proof.mjs`,
