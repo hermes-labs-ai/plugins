@@ -87,7 +87,7 @@
       "targets": ["claude"],
       "capabilities": ["hook"],
       "compatibility": {
-        "claude": "listed-unverified",
+        "claude": "verified",
         "codex": "unsupported",
         "copilot": "unsupported"
       }
