@@ -253,14 +253,14 @@
     {
       "id": "hermes-gate",
       "description": "Receipt-bound completion rail with session-start guidance, advisory cached checks, and boundary enforcement.",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "category": "developer-tools",
       "repository": "https://github.com/hermes-labs-ai/hermes-gate",
       "homepage": "https://github.com/hermes-labs-ai/hermes-gate",
       "source": {
         "path": "claude-plugin",
-        "ref": "v0.1.5",
-        "commit": "87ed28dbd536ae2b5ca2c697093c449d8dc4b181"
+        "ref": "v0.1.6",
+        "commit": "a09df80d762d866542dc4de4816307e0b952b375"
       },
       "targets": ["claude", "copilot"],
       "capabilities": ["hook"],
