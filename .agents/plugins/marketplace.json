@@ -10,7 +10,7 @@
         "source": "git-subdir",
         "url": "https://github.com/hermes-labs-ai/hermes-blind.git",
         "ref": "main",
-        "sha": "b14dacd5e8d2cbab6c25c6405388dac0414ad190",
+        "sha": "fe351480cc6dda8933154eaaa2986dd73d390075",
         "path": "claude-plugin"
       },
       "policy": {
@@ -28,7 +28,7 @@
         "source": "git-subdir",
         "url": "https://github.com/hermes-labs-ai/lintlang.git",
         "ref": "main",
-        "sha": "4c06241630f5c5b9882e4ee607721ae57717d013",
+        "sha": "949a2b148da5ca5b7e835838b511d3648d77769e",
         "path": "integrations/claude-code"
       },
       "policy": {

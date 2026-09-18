@@ -25,7 +25,7 @@
       "source": {
         "path": "claude-plugin",
         "ref": "main",
-        "commit": "b14dacd5e8d2cbab6c25c6405388dac0414ad190"
+        "commit": "fe351480cc6dda8933154eaaa2986dd73d390075"
       },
       "targets": ["claude", "codex", "copilot"],
       "capabilities": ["skill"],
@@ -44,7 +44,7 @@
       "source": {
         "path": "integrations/claude-code",
         "ref": "main",
-        "commit": "4c06241630f5c5b9882e4ee607721ae57717d013"
+        "commit": "949a2b148da5ca5b7e835838b511d3648d77769e"
       },
       "targets": ["claude", "codex", "copilot"],
       "capabilities": ["skill", "hook"],
@@ -120,7 +120,7 @@
       "source": {
         "path": "integrations/claude",
         "ref": "main",
-        "commit": "f79555a1a66197a5547d94defafca1b998a8bcd9"
+        "commit": "284b128add086cdfadd0e4a19919da4b75253eb6"
       },
       "targets": ["claude", "copilot"],
       "capabilities": ["hook"],
@@ -140,7 +140,7 @@
       "source": {
         "path": "claude-plugin",
         "ref": "main",
-        "commit": "74e7eb623d4e6b0d5fb16163cbfa8d2ec936356b"
+        "commit": "7cf8c0b440eff548c8d378313981475e5e89e902"
       },
       "targets": ["claude", "copilot"],
       "capabilities": ["hook"],
@@ -180,7 +180,7 @@
       "source": {
         "path": ".",
         "ref": "main",
-        "commit": "398b518d5cedc9a27cf5d57b6e13eb8dc5e72af9"
+        "commit": "ad44e09f619ae180c87c016ed89fb487285a07db"
       },
       "targets": ["claude", "copilot"],
       "capabilities": ["command", "hook"],
