@@ -30,8 +30,9 @@ import { json, readCatalog, root } from './catalog-lib.mjs';
 import { evaluate, namesFrom, parseInventory, stripAnsi } from './pilot-proof-lib.mjs';
 
 const SUPPORTED_HOSTS = new Set(['claude']);
-const MARKETPLACE_REF = 'hermes-labs-ai/plugins';
+const MARKETPLACE_REPOSITORY = 'https://github.com/hermes-labs-ai/plugins.git';
 const MARKETPLACE_NAME = 'hermes-labs';
+const MARKETPLACE_ID = 'hermes-labs-ai/plugins';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -98,13 +99,23 @@ if (version.status !== 0) {
   process.exit(1);
 }
 
-const readState = () => ({
-  marketplaces: namesFrom(run(['plugin', 'marketplace', 'list']).stdout),
-  plugins: namesFrom(run(['plugin', 'list']).stdout),
-});
+const gitHead = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' });
+const marketplaceCommit = (gitHead.stdout ?? '').trim();
+if (gitHead.status !== 0 || !/^[0-9a-f]{40}$/.test(marketplaceCommit)) {
+  console.error(`could not resolve repository HEAD: ${gitHead.stderr || gitHead.stdout}`);
+  process.exit(1);
+}
+const marketplaceRef = `${MARKETPLACE_REPOSITORY}#${marketplaceCommit}`;
 
-const baseline = readState();
-const marketplacePreexisting = baseline.marketplaces.includes(MARKETPLACE_NAME);
+const sourceState = spawnSync(
+  'git',
+  ['status', '--porcelain', '--', 'catalog.json', '.claude-plugin/marketplace.json', '.agents/plugins/marketplace.json', '.github/plugin/marketplace.json'],
+  { cwd: root, encoding: 'utf8' },
+);
+if (sourceState.status !== 0 || sourceState.stdout.trim() !== '') {
+  console.error('catalog and generated marketplace manifests must be committed before certification');
+  process.exit(1);
+}
 
 const steps = [];
 const capture = (result) => {
@@ -112,19 +123,48 @@ const capture = (result) => {
   return result;
 };
 
+const readState = () => {
+  const marketplaces = capture(run(['plugin', 'marketplace', 'list']));
+  const plugins = capture(run(['plugin', 'list']));
+  return {
+    ok: marketplaces.status === 0 && plugins.status === 0,
+    statuses: { marketplaces: marketplaces.status, plugins: plugins.status },
+    marketplaces: marketplaces.status === 0 ? namesFrom(marketplaces.stdout) : [],
+    plugins: plugins.status === 0 ? namesFrom(plugins.stdout) : [],
+  };
+};
+
+const baseline = readState();
+if (!baseline.ok) {
+  console.error(`could not read baseline host state: marketplace list=${baseline.statuses.marketplaces}, plugin list=${baseline.statuses.plugins}`);
+  process.exit(1);
+}
+
+const marketplacePreexisting = baseline.marketplaces.includes(MARKETPLACE_NAME);
+if (marketplacePreexisting) {
+  console.error(`refusing to certify with pre-existing marketplace: ${MARKETPLACE_NAME}`);
+  process.exit(1);
+}
+
+const preexistingTargets = targets
+  .map((plugin) => `${plugin.id}@${MARKETPLACE_NAME}`)
+  .filter((reference) => baseline.plugins.includes(reference));
+if (preexistingTargets.length > 0) {
+  console.error(`refusing to replace pre-existing plugin(s): ${preexistingTargets.join(', ')}`);
+  process.exit(1);
+}
+
 const results = [];
 const pendingUninstall = new Set();
 let marketplaceAdded = false;
 let runError = null;
 
 try {
-  if (!marketplacePreexisting) {
-    const added = capture(run(['plugin', 'marketplace', 'add', MARKETPLACE_REF]));
-    if (added.status !== 0) throw new Error(`marketplace add failed: ${added.stderr || added.stdout}`);
-    marketplaceAdded = true;
-    if (!/cloning via HTTPS/i.test(added.stdout)) {
-      throw new Error('marketplace was not fetched over public HTTPS');
-    }
+  const added = capture(run(['plugin', 'marketplace', 'add', marketplaceRef]));
+  if (added.status !== 0) throw new Error(`marketplace add failed: ${added.stderr || added.stdout}`);
+  marketplaceAdded = true;
+  if (!/cloning via HTTPS/i.test(added.stdout)) {
+    throw new Error('marketplace was not fetched over public HTTPS');
   }
 
   for (const plugin of targets) {
@@ -145,7 +185,14 @@ try {
     const details = capture(run(['plugin', 'details', reference]));
     const inventory = parseInventory(details.stdout);
     const tree = inspectInstalledTree(plugin.id, plugin.version);
-    const { checks, verdict } = evaluate(plugin, inventory, tree);
+    let checks = [];
+    let verdict = 'fail';
+    let detailError = null;
+    if (details.status === 0) {
+      ({ checks, verdict } = evaluate(plugin, inventory, tree));
+    } else {
+      detailError = details.stderr || details.stdout || 'claude plugin details failed';
+    }
 
     const removed = capture(run(['plugin', 'uninstall', reference]));
     if (removed.status === 0) pendingUninstall.delete(reference);
@@ -162,6 +209,7 @@ try {
       },
       checks,
       verdict,
+      ...(detailError ? { error: detailError } : {}),
       lifecycle: { install: installed.status, details: details.status, uninstall: removed.status },
     });
   }
@@ -177,6 +225,7 @@ try {
 
 const finalState = readState();
 const restored = !keep
+  && finalState.ok
   && JSON.stringify(finalState.marketplaces) === JSON.stringify(baseline.marketplaces)
   && JSON.stringify(finalState.plugins) === JSON.stringify(baseline.plugins);
 
@@ -186,7 +235,9 @@ const receipt = {
   host,
   hostVersion: version.stdout,
   marketplace: {
-    ref: MARKETPLACE_REF,
+    ref: MARKETPLACE_ID,
+    resolvedRef: marketplaceRef,
+    commit: marketplaceCommit,
     name: MARKETPLACE_NAME,
     transport: 'https',
     preexisting: marketplacePreexisting,
@@ -206,19 +257,34 @@ const receipt = {
   steps,
 };
 
-// Neither a failed run nor a single-entry run may clobber the committed
-// receipt, which has to keep covering every certifiable entry.
+// Only a complete, clean, fully passing run may replace the canonical receipt.
+const { pass, fail, unresolved, total } = receipt.summary;
+const commandFailure = steps.some((step) => step.status !== 0);
+const certifiable = only === null
+  && !keep
+  && !runError
+  && !commandFailure
+  && restored
+  && results.length === targets.length
+  && fail === 0
+  && unresolved === 0;
+
 const explicitOut = flag('out');
-const partial = Boolean(runError) || only !== null;
 const canonical = resolve(root, `evidence/pilot-proof-${host}.json`);
+const explicitResolved = explicitOut ? resolve(explicitOut) : null;
+if (explicitResolved === canonical && !certifiable) {
+  console.error('refusing to overwrite the canonical receipt with a non-certifying run');
+  process.exit(1);
+}
+
+const partial = !certifiable;
 const out = explicitOut ?? (partial ? `${canonical}.partial.json` : canonical);
 await mkdir(dirname(out), { recursive: true });
 await writeFile(out, json(receipt));
 
-const { pass, fail, unresolved, total } = receipt.summary;
 if (runError) console.error(`run failed: ${runError.message}`);
 console.log(`pilot proof (${host}): ${pass}/${total} pass, ${fail} fail, ${unresolved} unresolved`);
 console.log(`host state restored: ${restored}`);
 console.log(`receipt: ${out}${partial ? ' (partial run)' : ''}`);
 
-if (runError || fail > 0 || !restored) process.exit(1);
+if (runError || commandFailure || fail > 0 || unresolved > 0 || !restored) process.exit(1);
