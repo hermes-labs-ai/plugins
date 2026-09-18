@@ -78,11 +78,15 @@ tell you what a host actually loads. The pilot proof pack supplies that half:
 node scripts/pilot-proof.mjs --host claude
 ```
 
-For every entry targeting the host it adds this marketplace over public HTTPS,
-installs the entry, reads back the component inventory the host loaded,
-compares it against the declared capabilities, uninstalls, and finally restores
-the marketplace and plugin list to their pre-run state. The receipt records
-each command with its exit status, so a run that failed to clean up is visible
+For every entry targeting the host it adds this marketplace over public HTTPS
+at the exact pushed commit being certified, installs the entry, reads back the
+component inventory the host loaded, compares it against the declared
+capabilities, uninstalls, and finally restores the marketplace and plugin list
+to their pre-run state. Certification refuses to start if the `hermes-labs`
+marketplace or any target plugin is already present, and it refuses to replace
+the canonical receipt unless the full run passes with successful state reads,
+no unresolved checks, and verified restoration. The receipt records each host
+command with its exit status, so a run that failed to clean up is visible
 rather than silent.
 
 `verify` then refuses any entry marked `verified` for a **certifiable** host
@@ -137,8 +141,10 @@ verifier is offline and fails if generated files drift from the catalog.
 2. Record the immutable commit, released version, plugin root, capabilities,
    and host-specific compatibility in `catalog.json`.
 3. Run `npm run generate`.
-4. Re-run `node scripts/pilot-proof.mjs --host claude` when the entry claims a
-   `verified` host, so the receipt covers the new commit.
+4. Commit and push the catalog plus generated marketplace manifests, then
+   re-run `node scripts/pilot-proof.mjs --host claude` when the entry claims a
+   `verified` host, so Claude installs the exact pushed marketplace commit and
+   the receipt covers the new plugin pin.
 5. Run the checks above.
 6. Commit `catalog.json`, all three generated manifests, and any updated
    receipt together.
