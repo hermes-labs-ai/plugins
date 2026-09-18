@@ -16,6 +16,10 @@ const manifestPath = fileURLToPath(
   new URL('../.claude-plugin/marketplace.json', import.meta.url),
 );
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+const readme = readFileSync(
+  fileURLToPath(new URL('../README.md', import.meta.url)),
+  'utf8',
+);
 
 const SSH_URL = /^(git@|ssh:\/\/|git:\/\/)/;
 
@@ -73,6 +77,26 @@ test('agent-kickstart uses a full HTTPS git source for its repo-root plugin', ()
     ref: 'main',
   });
   assert.equal(entry.version, '0.3.0');
+});
+
+test('recent upstream plugin releases are represented in the marketplace', () => {
+  const expectedVersions = {
+    'little-canary': '0.3.7',
+    'claude-trash-guard': '0.1.3',
+    'agent-signage': '0.2.1',
+    'hermes-jailbench': '0.2.1',
+  };
+
+  for (const [name, version] of Object.entries(expectedVersions)) {
+    const entry = manifest.plugins.find((plugin) => plugin.name === name);
+    assert.ok(entry, `${name} is missing from the catalog`);
+    assert.equal(entry.version, version);
+    assert.match(
+      readme,
+      new RegExp('^\\| `' + name + '` \\| ' + version + ' \\|', 'm'),
+      `${name}'s README row does not match its marketplace version`,
+    );
+  }
 });
 
 // --- Path integrity: does `path` actually point at a plugin? ---------------
