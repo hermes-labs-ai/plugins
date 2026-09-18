@@ -26,9 +26,12 @@ jobs:
         run: |
           claude --version
           node scripts/pilot-proof.mjs --host claude
-      - name: Upload canonical receipt
+      - name: Upload receipt evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pilot-proof-claude
-          path: evidence/pilot-proof-claude.json
+          path: |
+            evidence/pilot-proof-claude.json
+            evidence/pilot-proof-claude.json.partial.json
           if-no-files-found: error
