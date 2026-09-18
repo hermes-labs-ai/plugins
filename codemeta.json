@@ -1,11 +1,11 @@
 {
   "@context": "https://w3id.org/codemeta/3.1",
   "@type": "SoftwareSourceCode",
-  "name": "claude-plugins",
-  "description": "Hermes Labs plugin marketplace manifest for Claude Code. Not a standalone tool: a validated marketplace.json that declares and links to seven separately maintained Hermes Labs plugins so Claude Code can discover and install them via `/plugin marketplace add hermes-labs-ai/claude-plugins`.",
-  "codeRepository": "https://github.com/hermes-labs-ai/claude-plugins",
+  "name": "plugins",
+  "description": "Canonical Hermes Labs distribution catalog that deterministically generates native Claude Code, Codex, and GitHub Copilot marketplace manifests while product code remains in product repositories.",
+  "codeRepository": "https://github.com/hermes-labs-ai/plugins",
   "license": "https://spdx.org/licenses/Apache-2.0",
-  "programmingLanguage": "JSON",
+  "programmingLanguage": ["JavaScript", "JSON"],
   "author": [{"@type": "Person", "givenName": "Rolando", "familyName": "Bosch Rodriguez", "identifier": "https://orcid.org/0009-0005-4896-1112"}],
-  "keywords": ["claude code", "plugin marketplace", "agent tooling", "developer tools"]
+  "keywords": ["agent plugins", "claude code", "codex", "github copilot", "plugin marketplace", "agent tooling"]
 }

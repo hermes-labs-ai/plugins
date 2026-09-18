@@ -1,4 +1,4 @@
-name: validate-marketplace
+name: validate-catalog
 
 on:
   push:
@@ -14,4 +14,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node --test tests/*.test.mjs
+      - run: npm test
+      - run: npm run verify
+      - run: npm run verify:network
+      - run: npm run generate
+      - run: git diff --exit-code -- catalog.json .claude-plugin/marketplace.json .agents/plugins/marketplace.json .github/plugin/marketplace.json

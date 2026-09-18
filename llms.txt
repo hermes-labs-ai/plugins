@@ -1,78 +1,27 @@
-# claude-plugins
+# Hermes Labs plugin catalog
 
-> Claude Code plugin marketplace for Hermes Labs: a single manifest that lets
-> `claude` install any of seven independently maintained Hermes Labs plugins
-> by name, from their own source repos.
+> Canonical, generated multi-host distribution catalog for Hermes Labs agent plugins.
 
-This repo holds only the marketplace manifest
-(`.claude-plugin/marketplace.json`). It does not contain any plugin's code —
-each plugin lives in, and is versioned by, its own repository, and Claude Code
-fetches it from there at install time.
+Authoritative input: `catalog.json`.
 
-## Add the marketplace
+Generated outputs:
 
+- `.claude-plugin/marketplace.json` — Claude Code namespace `hermes-labs`
+- `.agents/plugins/marketplace.json` — Codex namespace `hermes-labs`
+- `.github/plugin/marketplace.json` — GitHub Copilot namespace `hermes-labs-copilot`
+
+Product implementations remain in the repositories named by each catalog
+entry. Every source is HTTPS and pinned to a full commit. Compatibility
+statuses distinguish verified runtime behavior from a preserved but
+uncertified listing.
+
+Build and verify:
+
+```bash
+npm run generate
+npm test
+npm run verify
+npm run verify:network
 ```
-/plugin marketplace add hermes-labs-ai/claude-plugins
-```
 
-Then install a plugin by name:
-
-```
-/plugin install little-canary@hermes-labs
-```
-
-`/plugin marketplace update hermes-labs` refreshes the manifest from `main`.
-
-## Plugins
-
-- `hermes-blind` — local recovery anchors for a Claude Code or Codex session,
-  plus evidence-gated evaluation prompts for picking a session back up
-  without trusting its own self-report.
-  https://github.com/hermes-labs-ai/hermes-blind
-- `lintlang` — runs LintLang after Claude Code edits a supported
-  prompt/config file and returns concise repair guidance for what it finds.
-  https://github.com/hermes-labs-ai/lintlang
-- `rule-audit` — on-demand static analysis of an AI system prompt or
-  AGENTS.md for contradictions, coverage gaps, priority ambiguities, and
-  meta-paradoxes.
-  https://github.com/hermes-labs-ai/rule-audit
-- `hermeneutic-gate` — legacy advisory Stop-hook bundle for the fixed
-  English gate; not certified against current Claude Stop behavior in
-  v0.1.7, so prefer the `hermeneutic` CLI directly.
-  https://github.com/hermes-labs-ai/hermeneutic
-- `little-canary` — blocks a Claude Code turn when a local Little Canary
-  server rejects the submitted prompt.
-  https://github.com/hermes-labs-ai/little-canary
-- `claude-trash-guard` — blocks permanent-delete shell commands (`rm -rf`
-  and friends) and redirects the agent to a recoverable trash workflow
-  instead.
-  https://github.com/hermes-labs-ai/agent-trash-guard
-- `agent-signage` — a `PreToolUse` hook that reports when the file you're
-  about to touch sits in a git checkout that's behind its upstream, and
-  stays silent otherwise.
-  https://github.com/hermes-labs-ai/agent-signage
-
-## Do not use this repo as
-
-- a source of plugin code — it ships none; every install pulls from the
-  plugin's own repo
-- proof that a listed plugin is actively maintained or certified for the
-  current Claude Code release (see `hermeneutic-gate` above for a plugin
-  that explicitly is not)
-- a general Claude Code plugin registry — it lists only plugins Hermes Labs
-  itself built and maintains
-
-## Docs
-
-- [README](https://github.com/hermes-labs-ai/claude-plugins/blob/main/README.md) — full plugin table, versions, and how to propose a new plugin
-- [marketplace.json](https://github.com/hermes-labs-ai/claude-plugins/blob/main/.claude-plugin/marketplace.json) — the manifest Claude Code actually reads
-
-## Optional
-
-- [CONTRIBUTING](https://github.com/hermes-labs-ai/claude-plugins/blob/main/CONTRIBUTING.md) — how to propose a plugin for this marketplace
-
-## About Hermes Labs
-
-Hermes Labs is an independent AI-reliability lab building open-source tools
-that catch silent failure modes in production AI. More at
-[hermes-labs.ai](https://hermes-labs.ai).
+Canonical repository: https://github.com/hermes-labs-ai/plugins
