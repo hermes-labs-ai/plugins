@@ -26,13 +26,13 @@
     },
     {
       "name": "lintlang",
-      "description": "Returns concise LintLang repair guidance after supported prompt and configuration edits.",
-      "version": "0.1.2",
+      "description": "Runs the released LintLang CLI on demand as a portable audit skill, with a separate automatic post-edit hook for Claude Code.",
+      "version": "0.2.0",
       "source": {
         "source": "url",
         "url": "https://github.com/hermes-labs-ai/lintlang.git",
         "ref": "main",
-        "sha": "949a2b148da5ca5b7e835838b511d3648d77769e",
+        "sha": "4c06241630f5c5b9882e4ee607721ae57717d013",
         "path": "integrations/claude-code"
       },
       "category": "development",
