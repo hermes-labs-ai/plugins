@@ -38,9 +38,8 @@
       "version": "0.4.0",
       "category": "developer-tools",
       "source": {
-        "source": "git-subdir",
+        "source": "url",
         "url": "https://github.com/hermes-labs-ai/rule-audit.git",
-        "path": ".",
         "ref": "main"
       }
     },
@@ -99,9 +98,8 @@
       "version": "0.2.1",
       "category": "security",
       "source": {
-        "source": "git-subdir",
+        "source": "url",
         "url": "https://github.com/hermes-labs-ai/hermes-jailbench.git",
-        "path": ".",
         "ref": "main"
       },
       "homepage": "https://github.com/hermes-labs-ai/hermes-jailbench"
