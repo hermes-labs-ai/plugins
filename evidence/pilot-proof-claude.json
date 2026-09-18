@@ -5,38 +5,31 @@
   "hostVersion": "2.1.276 (Claude Code)",
   "marketplace": {
     "ref": "hermes-labs-ai/plugins",
+    "resolvedRef": "hermes-labs-ai/plugins@iris/pilot-proof-pack",
+    "sourceRef": "iris/pilot-proof-pack",
+    "commit": "bf8bbb26cf17f1c5c15e25e19476dda547a1055a",
     "name": "hermes-labs",
     "transport": "https",
     "preexisting": false
   },
   "catalogVersion": "1.0.0",
   "baseline": {
-    "marketplaces": [
-      "claude-plugins-official",
-      "intent-verify"
-    ],
-    "plugins": [
-      "frontend-design@claude-plugins-official",
-      "intent-verify@intent-verify",
-      "playwright@claude-plugins-official",
-      "pr-review-toolkit@claude-plugins-official",
-      "pyright-lsp@claude-plugins-official",
-      "swift-lsp@claude-plugins-official"
-    ]
+    "ok": true,
+    "statuses": {
+      "marketplaces": 0,
+      "plugins": 0
+    },
+    "marketplaces": [],
+    "plugins": []
   },
   "finalState": {
-    "marketplaces": [
-      "claude-plugins-official",
-      "intent-verify"
-    ],
-    "plugins": [
-      "frontend-design@claude-plugins-official",
-      "intent-verify@intent-verify",
-      "playwright@claude-plugins-official",
-      "pr-review-toolkit@claude-plugins-official",
-      "pyright-lsp@claude-plugins-official",
-      "swift-lsp@claude-plugins-official"
-    ]
+    "ok": true,
+    "statuses": {
+      "marketplaces": 0,
+      "plugins": 0
+    },
+    "marketplaces": [],
+    "plugins": []
   },
   "restored": true,
   "results": [
@@ -49,7 +42,7 @@
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/hermes-blind",
-        "commit": "b14dacd5e8d2cbab6c25c6405388dac0414ad190",
+        "commit": "fe351480cc6dda8933154eaaa2986dd73d390075",
         "path": "claude-plugin"
       },
       "observed": {
@@ -451,7 +444,7 @@
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/agent-trash-guard",
-        "commit": "f79555a1a66197a5547d94defafca1b998a8bcd9",
+        "commit": "284b128add086cdfadd0e4a19919da4b75253eb6",
         "path": "integrations/claude"
       },
       "observed": {
@@ -529,7 +522,7 @@
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/agent-signage",
-        "commit": "74e7eb623d4e6b0d5fb16163cbfa8d2ec936356b",
+        "commit": "7cf8c0b440eff548c8d378313981475e5e89e902",
         "path": "claude-plugin"
       },
       "observed": {
@@ -688,7 +681,7 @@
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/agent-kickstart",
-        "commit": "398b518d5cedc9a27cf5d57b6e13eb8dc5e72af9",
+        "commit": "ad44e09f619ae180c87c016ed89fb487285a07db",
         "path": "."
       },
       "observed": {
@@ -1099,7 +1092,19 @@
   },
   "steps": [
     {
-      "command": "claude plugin marketplace add hermes-labs-ai/plugins",
+      "command": "claude plugin marketplace list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace add hermes-labs-ai/plugins@iris/pilot-proof-pack",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace list --json",
       "status": 0
     },
     {
@@ -1260,6 +1265,14 @@
     },
     {
       "command": "claude plugin marketplace remove hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin list",
       "status": 0
     }
   ]
