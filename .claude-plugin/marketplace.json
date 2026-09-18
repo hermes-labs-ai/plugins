@@ -24,7 +24,7 @@
     {
       "name": "lintlang",
       "description": "Runs the released LintLang CLI on demand as a portable audit skill, with a separate automatic post-edit hook for Claude Code.",
-      "version": "0.2.0",
+      "version": "0.1.2",
       "category": "development",
       "source": {
         "source": "git-subdir",
