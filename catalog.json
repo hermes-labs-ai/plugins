@@ -27,8 +27,14 @@
         "ref": "main",
         "commit": "fe351480cc6dda8933154eaaa2986dd73d390075"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -46,8 +52,15 @@
         "ref": "main",
         "commit": "4c06241630f5c5b9882e4ee607721ae57717d013"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "hook"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "listed-unverified",
@@ -65,8 +78,15 @@
         "ref": "main",
         "commit": "bd5ef9e6ca8666756592a9350f4c4335a1174e67"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "command"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "command"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -84,8 +104,12 @@
         "ref": "main",
         "commit": "7266a47d2ad6985c2dabf52207fae0ce42fbe0c3"
       },
-      "targets": ["claude"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -95,16 +119,21 @@
     {
       "id": "little-canary",
       "description": "Screens inbound prompts through a local Little Canary service before the host sends them to the main model.",
-      "version": "0.3.7",
+      "version": "0.3.8",
       "category": "security",
       "repository": "https://github.com/hermes-labs-ai/little-canary",
       "source": {
         "path": "plugins/claude-code",
-        "ref": "main",
-        "commit": "6db9a0ace8083b32200365f67d2ce4c600241e47"
+        "ref": "v0.3.8",
+        "commit": "3851078663b49b751c2cd246ca57eb89d534dc37"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -122,8 +151,13 @@
         "ref": "main",
         "commit": "284b128add086cdfadd0e4a19919da4b75253eb6"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -142,8 +176,13 @@
         "ref": "main",
         "commit": "7cf8c0b440eff548c8d378313981475e5e89e902"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -162,8 +201,14 @@
         "ref": "main",
         "commit": "ec933be5e4c9f8c07caa0c9f19b45a925067d655"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "listed-unverified",
@@ -182,8 +227,14 @@
         "ref": "main",
         "commit": "ad44e09f619ae180c87c016ed89fb487285a07db"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["command", "hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "command",
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
@@ -202,8 +253,15 @@
         "ref": "main",
         "commit": "df29c2e1f2e400fdec0ad515332884a8c821bd15"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill", "command"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill",
+        "command"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -222,8 +280,14 @@
         "ref": "main",
         "commit": "2e2be2574a17b23870c9122d18b06e56a6a8434a"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -242,8 +306,14 @@
         "ref": "main",
         "commit": "9d96cd9eb2506a7c3104d730b99d4f58d635a417"
       },
-      "targets": ["claude", "codex", "copilot"],
-      "capabilities": ["skill"],
+      "targets": [
+        "claude",
+        "codex",
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "verified",
@@ -253,17 +323,22 @@
     {
       "id": "hermes-gate",
       "description": "Receipt-bound completion rail with session-start guidance, advisory cached checks, and boundary enforcement.",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "category": "developer-tools",
       "repository": "https://github.com/hermes-labs-ai/hermes-gate",
       "homepage": "https://github.com/hermes-labs-ai/hermes-gate",
       "source": {
         "path": "claude-plugin",
-        "ref": "v0.1.6",
-        "commit": "a09df80d762d866542dc4de4816307e0b952b375"
+        "ref": "v0.1.7",
+        "commit": "3c2c17157a03da65ff8af5d60300e1e10957594c"
       },
-      "targets": ["claude", "copilot"],
-      "capabilities": ["hook"],
+      "targets": [
+        "claude",
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
       "compatibility": {
         "claude": "verified",
         "codex": "unsupported",
