@@ -1,0 +1,1279 @@
+{
+  "schemaVersion": 1,
+  "kind": "pilot-proof",
+  "host": "claude",
+  "hostVersion": "2.1.276 (Claude Code)",
+  "marketplace": {
+    "ref": "hermes-labs-ai/plugins",
+    "resolvedRef": "hermes-labs-ai/plugins@iris/pilot-proof-pack",
+    "sourceRef": "iris/pilot-proof-pack",
+    "commit": "bf8bbb26cf17f1c5c15e25e19476dda547a1055a",
+    "name": "hermes-labs",
+    "transport": "https",
+    "preexisting": false
+  },
+  "catalogVersion": "1.0.0",
+  "baseline": {
+    "ok": true,
+    "statuses": {
+      "marketplaces": 0,
+      "plugins": 0
+    },
+    "marketplaces": [],
+    "plugins": []
+  },
+  "finalState": {
+    "ok": true,
+    "statuses": {
+      "marketplaces": 0,
+      "plugins": 0
+    },
+    "marketplaces": [],
+    "plugins": []
+  },
+  "restored": true,
+  "results": [
+    {
+      "id": "hermes-blind",
+      "version": "0.3.0",
+      "declared": [
+        "skill"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/hermes-blind",
+        "commit": "fe351480cc6dda8933154eaaa2986dd73d390075",
+        "path": "claude-plugin"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "hermes-blind"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "hermes-blind"
+          ],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "lintlang",
+      "version": "0.2.0",
+      "declared": [
+        "skill",
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/lintlang",
+        "commit": "4c06241630f5c5b9882e4ee607721ae57717d013",
+        "path": "integrations/claude-code"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "lintlang-audit"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 1,
+            "names": [
+              "PostToolUse"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "lintlang-audit"
+          ],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "rule-audit",
+      "version": "0.4.0",
+      "declared": [
+        "skill",
+        "command"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/rule-audit",
+        "commit": "bd5ef9e6ca8666756592a9350f4c4335a1174e67",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "rule-audit"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "rule-audit"
+          ],
+          "commands": [
+            "rule-audit"
+          ]
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "hermeneutic-gate",
+      "version": "0.1.7",
+      "declared": [
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/hermeneutic",
+        "commit": "7266a47d2ad6985c2dabf52207fae0ce42fbe0c3",
+        "path": "claude-plugin"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 0,
+            "names": []
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 1,
+            "names": [
+              "Stop"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "little-canary",
+      "version": "0.3.7",
+      "declared": [
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/little-canary",
+        "commit": "6db9a0ace8083b32200365f67d2ce4c600241e47",
+        "path": "plugins/claude-code"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 0,
+            "names": []
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 1,
+            "names": [
+              "UserPromptSubmit"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "claude-trash-guard",
+      "version": "0.1.3",
+      "declared": [
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/agent-trash-guard",
+        "commit": "284b128add086cdfadd0e4a19919da4b75253eb6",
+        "path": "integrations/claude"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 0,
+            "names": []
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 1,
+            "names": [
+              "PreToolUse"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "agent-signage",
+      "version": "0.2.1",
+      "declared": [
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/agent-signage",
+        "commit": "7cf8c0b440eff548c8d378313981475e5e89e902",
+        "path": "claude-plugin"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 0,
+            "names": []
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 1,
+            "names": [
+              "PreToolUse"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "hermes-jailbench",
+      "version": "0.2.1",
+      "declared": [
+        "skill"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/hermes-jailbench",
+        "commit": "ec933be5e4c9f8c07caa0c9f19b45a925067d655",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "hermes-jailbench"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "hermes-jailbench"
+          ],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "agent-kickstart",
+      "version": "0.3.0",
+      "declared": [
+        "command",
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/agent-kickstart",
+        "commit": "ad44e09f619ae180c87c016ed89fb487285a07db",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 2,
+            "names": [
+              "kickstart",
+              "leave-kickstart"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 2,
+            "names": [
+              "SessionStart",
+              "SessionEnd"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": [
+            "kickstart.md",
+            "leave-kickstart.md"
+          ]
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "intent-verify",
+      "version": "0.2.0",
+      "declared": [
+        "skill",
+        "command"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/intent-verify",
+        "commit": "df29c2e1f2e400fdec0ad515332884a8c821bd15",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 3,
+            "names": [
+              "check",
+              "intent-verify",
+              "map"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "intent-verify"
+          ],
+          "commands": [
+            "check.md",
+            "map.md"
+          ]
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "quick-gate-python",
+      "version": "0.3.1",
+      "declared": [
+        "skill"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/quick-gate-python",
+        "commit": "2e2be2574a17b23870c9122d18b06e56a6a8434a",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "quick-gate-python"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "quick-gate-python"
+          ],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "quick-gate-js",
+      "version": "0.3.0",
+      "declared": [
+        "skill"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/quick-gate-js",
+        "commit": "9d96cd9eb2506a7c3104d730b99d4f58d635a417",
+        "path": "."
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 1,
+            "names": [
+              "quick-gate-js"
+            ]
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 0,
+            "names": []
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [
+            "quick-gate-js"
+          ],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": true,
+          "observed": true,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    },
+    {
+      "id": "hermes-gate",
+      "version": "0.1.6",
+      "declared": [
+        "hook"
+      ],
+      "compatibility": "verified",
+      "source": {
+        "repository": "https://github.com/hermes-labs-ai/hermes-gate",
+        "commit": "a09df80d762d866542dc4de4816307e0b952b375",
+        "path": "claude-plugin"
+      },
+      "observed": {
+        "inventory": {
+          "skills": {
+            "count": 0,
+            "names": []
+          },
+          "agents": {
+            "count": 0,
+            "names": []
+          },
+          "hooks": {
+            "count": 3,
+            "names": [
+              "SessionStart",
+              "Stop",
+              "PreToolUse"
+            ]
+          },
+          "mcpServers": {
+            "count": 0,
+            "names": []
+          },
+          "lspServers": {
+            "count": 0,
+            "names": []
+          }
+        },
+        "installedTree": {
+          "resolved": true,
+          "skills": [],
+          "commands": []
+        }
+      },
+      "checks": [
+        {
+          "capability": "hook",
+          "declared": true,
+          "observed": true,
+          "status": "pass"
+        },
+        {
+          "capability": "mcp",
+          "declared": false,
+          "observed": false,
+          "status": "pass"
+        },
+        {
+          "capability": "skill",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        },
+        {
+          "capability": "command",
+          "declared": false,
+          "observed": false,
+          "status": "pass",
+          "note": "host reports skills and commands in one Skills bucket; separated from the installed tree"
+        }
+      ],
+      "verdict": "pass",
+      "lifecycle": {
+        "install": 0,
+        "details": 0,
+        "uninstall": 0
+      }
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "pass": 13,
+    "fail": 0,
+    "unresolved": 0
+  },
+  "steps": [
+    {
+      "command": "claude plugin marketplace list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace add hermes-labs-ai/plugins@iris/pilot-proof-pack",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace list --json",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install hermes-blind@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details hermes-blind@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall hermes-blind@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install lintlang@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details lintlang@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall lintlang@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install rule-audit@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details rule-audit@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall rule-audit@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install hermeneutic-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details hermeneutic-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall hermeneutic-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install little-canary@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details little-canary@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall little-canary@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install claude-trash-guard@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details claude-trash-guard@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall claude-trash-guard@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install agent-signage@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details agent-signage@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall agent-signage@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install hermes-jailbench@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details hermes-jailbench@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall hermes-jailbench@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install agent-kickstart@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details agent-kickstart@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall agent-kickstart@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install intent-verify@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details intent-verify@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall intent-verify@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install quick-gate-python@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details quick-gate-python@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall quick-gate-python@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install quick-gate-js@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details quick-gate-js@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall quick-gate-js@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin install hermes-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin details hermes-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin uninstall hermes-gate@hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace remove hermes-labs",
+      "status": 0
+    },
+    {
+      "command": "claude plugin marketplace list",
+      "status": 0
+    },
+    {
+      "command": "claude plugin list",
+      "status": 0
+    }
+  ]
+}

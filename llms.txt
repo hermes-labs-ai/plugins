@@ -15,6 +15,18 @@ entry. Every source is HTTPS and pinned to a full commit. Compatibility
 statuses distinguish verified runtime behavior from a preserved but
 uncertified listing.
 
+Runtime evidence:
+
+- `evidence/pilot-proof-claude.json` — public install, component-inventory
+  readback, capability comparison, uninstall, and host-state restoration for
+  every Claude-targeted entry.
+
+Claude is the only host this pack can certify, because Codex and Copilot
+expose no component-inventory readback. A Claude entry may claim `verified`
+only while the committed receipt has a passing result for the same pinned
+commit and version; `verify` enforces that. Codex `verified` entries rest on
+earlier manual checks and are not receipt-backed.
+
 Build and verify:
 
 ```bash
@@ -22,6 +34,7 @@ npm run generate
 npm test
 npm run verify
 npm run verify:network
+npm run certify
 ```
 
 Canonical repository: https://github.com/hermes-labs-ai/plugins
