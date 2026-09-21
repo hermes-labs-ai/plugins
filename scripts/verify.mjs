@@ -61,6 +61,80 @@ for (const [relativePath, host] of generated) {
   }
 }
 
+// Hosts whose runtime the pilot proof pack can actually certify. For these,
+// `verified` has to be backed by a receipt for the exact pinned commit:
+// bumping a pin without re-certifying fails here, and downgrading the entry to
+// `listed-unverified` is the other legitimate way to clear it. Reading the
+// committed receipt keeps this check available in CI, where no agent host CLI
+// is installed.
+//
+// Codex and Copilot are absent on purpose. Neither CLI exposes a component
+// inventory readback, so no receipt can exist for them, and the `verified`
+// entries they already carry rest on earlier manual checks rather than on this
+// mechanism. That asymmetry is documented in README.md rather than papered over
+// by gating hosts this pack cannot actually prove.
+const CERTIFIED_HOSTS = ['claude'];
+
+for (const host of CERTIFIED_HOSTS) {
+  const receiptPath = `evidence/pilot-proof-${host}.json`;
+  let receipt;
+  try {
+    receipt = JSON.parse(await readFile(resolve(root, receiptPath), 'utf8'));
+  } catch (error) {
+    errors.push(`${receiptPath}: missing or unreadable pilot-proof receipt (${error.code ?? error.message})`);
+    continue;
+  }
+
+  check(receipt.schemaVersion === 1, `${receiptPath}: unsupported schemaVersion`);
+  check(receipt.kind === 'pilot-proof', `${receiptPath}: unexpected receipt kind ${receipt.kind}`);
+  check(receipt.host === host, `${receiptPath}: receipt host is ${receipt.host}`);
+  check(receipt.catalogVersion === catalog.catalog.version, `${receiptPath}: catalog version ${receipt.catalogVersion} does not match ${catalog.catalog.version}`);
+  check(receipt.marketplace?.ref === 'hermes-labs-ai/plugins', `${receiptPath}: unexpected marketplace ref ${receipt.marketplace?.ref}`);
+  check(/^[0-9a-f]{40}$/.test(receipt.marketplace?.commit ?? ''), `${receiptPath}: marketplace commit must be a full SHA`);
+  check(typeof receipt.marketplace?.sourceRef === 'string' && receipt.marketplace.sourceRef.length > 0, `${receiptPath}: marketplace sourceRef is missing`);
+  check(receipt.marketplace?.resolvedRef === `${receipt.marketplace?.ref}@${receipt.marketplace?.sourceRef}`, `${receiptPath}: marketplace resolvedRef does not match its source ref`);
+  check(receipt.marketplace?.preexisting === false, `${receiptPath}: certification must start without a pre-existing Hermes marketplace`);
+  check(receipt.restored === true, `${receiptPath}: run did not restore host state, so its evidence is not trustworthy`);
+  check(Array.isArray(receipt.steps) && receipt.steps.length > 0, `${receiptPath}: command evidence is missing`);
+  if (Array.isArray(receipt.steps)) {
+    for (const step of receipt.steps) {
+      check(step.status === 0, `${receiptPath}: command failed: ${step.command}`);
+    }
+  }
+
+  const byId = new Map((receipt.results ?? []).map((result) => [result.id, result]));
+  for (const plugin of catalog.plugins) {
+    if (plugin.compatibility?.[host] !== 'verified') continue;
+    const result = byId.get(plugin.id);
+    if (!result) {
+      errors.push(`${plugin.id}: ${host} compatibility is verified but ${receiptPath} has no result`);
+      continue;
+    }
+    check(result.verdict === 'pass', `${plugin.id}: ${host} certification verdict is ${result.verdict}`);
+    check(result.lifecycle?.install === 0, `${plugin.id}: install lifecycle status is ${result.lifecycle?.install}`);
+    check(result.lifecycle?.details === 0, `${plugin.id}: details lifecycle status is ${result.lifecycle?.details}`);
+    check(result.lifecycle?.uninstall === 0, `${plugin.id}: uninstall lifecycle status is ${result.lifecycle?.uninstall}`);
+    check(Array.isArray(result.checks) && result.checks.length > 0, `${plugin.id}: certification checks are missing`);
+    if (Array.isArray(result.checks)) {
+      for (const evidenceCheck of result.checks) {
+        check(evidenceCheck.status === 'pass', `${plugin.id}: ${evidenceCheck.capability ?? 'unknown'} check is ${evidenceCheck.status}`);
+      }
+    }
+    check(
+      json(result.declared) === json(plugin.capabilities),
+      `${plugin.id}: certified capabilities do not match the catalog`,
+    );
+    check(
+      result.source?.commit === plugin.source.commit,
+      `${plugin.id}: certified commit ${result.source?.commit} does not match pinned ${plugin.source.commit}; re-run scripts/pilot-proof.mjs`,
+    );
+    check(
+      result.version === plugin.version,
+      `${plugin.id}: certified version ${result.version} does not match catalog ${plugin.version}`,
+    );
+  }
+}
+
 for (const forbidden of ['marketplace.json', '.plugin/marketplace.json']) {
   try {
     await readFile(resolve(root, forbidden));

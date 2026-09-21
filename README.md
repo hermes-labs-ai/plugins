@@ -57,7 +57,10 @@ The catalog records capability type and compatibility separately:
 - `skill` means an on-demand workflow is available to a host.
 - `mcp` means an MCP server connection is packaged.
 - `hook` means a host event interceptor exists.
-- `verified` means the capability has host-specific evidence.
+- `verified` means the capability has host-specific evidence. For Claude that
+  evidence is a pilot-proof receipt for the exact pinned commit, enforced by
+  `verify`. For Codex it rests on earlier manual checks, because no receipt can
+  exist yet; see Runtime certification below.
 - `listed-unverified` preserves an existing install route without claiming a
   completed runtime certification.
 - `unsupported` keeps the entry out of that host manifest.
@@ -65,6 +68,57 @@ The catalog records capability type and compatibility separately:
 A loaded skill does not prove that an MCP server connected. A connected MCP
 server does not prove that a hook intercepted an event. An input-screening
 hook does not block arbitrary output tool execution.
+
+## Runtime certification
+
+`verify.mjs` checks identifiers, pins and generated output, none of which can
+tell you what a host actually loads. The pilot proof pack supplies that half:
+
+```bash
+node scripts/pilot-proof.mjs --host claude
+```
+
+For every entry targeting the host it adds the pushed marketplace branch over
+public HTTPS, verifies the cloned marketplace HEAD is the exact commit being
+certified, installs the entry, reads back the component inventory the host
+loaded, compares it against the declared capabilities, uninstalls, and finally
+restores the marketplace and plugin list
+to their pre-run state. Certification refuses to start if the `hermes-labs`
+marketplace or any target plugin is already present, and it refuses to replace
+the canonical receipt unless the full run passes with successful state reads,
+no unresolved checks, and verified restoration. The receipt records each host
+command with its exit status, so a run that failed to clean up is visible
+rather than silent.
+
+`verify` then refuses any entry marked `verified` for a **certifiable** host
+unless the committed receipt has a passing result for the same commit and
+version. Bumping a pin without re-certifying fails; downgrading the entry to
+`listed-unverified` is the other legitimate way to clear it. The check reads
+the committed receipt, so it still runs in CI, where no agent host CLI is
+installed.
+
+Claude is currently the only certifiable host, and this is the honest state of
+the other two:
+
+| Host | Certifiable | What `verified` rests on today |
+|---|---|---|
+| Claude Code | yes | `evidence/pilot-proof-claude.json`, enforced by `verify` |
+| Codex | no | earlier manual checks, not receipt-backed and not gated |
+| GitHub Copilot CLI | no | no entry currently claims `verified` |
+
+Codex and Copilot install the same pinned sources, but neither CLI exposes a
+component inventory readback, so `pilot-proof.mjs` refuses those hosts rather
+than certify a lifecycle and imply capability evidence. The five Codex
+`verified` entries predate this pack; they are not downgraded here because that
+would assert a negative the pack cannot demonstrate either. Extending coverage
+means adding a host to `CERTIFIED_HOSTS` once a readback exists.
+
+Two further limits are deliberate. `claude plugin details` reports slash
+commands inside its `Skills` bucket, so `skill` and `command` are separated
+from the installed plugin tree rather than from the inventory. And the pack
+probes only `skill`, `mcp`, `hook` and `command`; an entry declaring a
+schema-legal capability with no probe, such as `agent` or `lsp`, is failed
+rather than passed by omission.
 
 ## Build and verify
 
@@ -88,8 +142,13 @@ verifier is offline and fails if generated files drift from the catalog.
 2. Record the immutable commit, released version, plugin root, capabilities,
    and host-specific compatibility in `catalog.json`.
 3. Run `npm run generate`.
-4. Run the checks above.
-5. Commit `catalog.json` and all three generated manifests together.
+4. Commit and push the catalog plus generated marketplace manifests, then
+   re-run `node scripts/pilot-proof.mjs --host claude` when the entry claims a
+   `verified` host. The runner adds the pushed branch and refuses certification
+   unless Claude's local marketplace clone resolves to that exact commit.
+5. Run the checks above.
+6. Commit `catalog.json`, all three generated manifests, and any updated
+   receipt together.
 
 Never copy product implementation into this repository, replace a commit pin
 with a moving branch-only reference, or mark a host `verified` based only on
