@@ -48,7 +48,7 @@
     },
     {
       "name": "hermeneutic-gate",
-      "description": "Legacy advisory Stop-hook bundle for the fixed English gate; current Claude Stop compatibility is not certified in v0.1.7.",
+      "description": "Legacy advisory Stop-hook bundle for the fixed English gate, with Claude Stop compatibility certified in v0.1.7.",
       "version": "0.1.7",
       "category": "developer-tools",
       "source": {
