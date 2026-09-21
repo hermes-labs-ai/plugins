@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "pilot-proof",
   "host": "claude",
-  "hostVersion": "2.1.276 (Claude Code)",
+  "hostVersion": "2.1.278 (Claude Code)",
   "marketplace": {
     "ref": "hermes-labs-ai/plugins",
     "resolvedRef": "hermes-labs-ai/plugins@iris/pilot-proof-pack",
     "sourceRef": "iris/pilot-proof-pack",
-    "commit": "bf8bbb26cf17f1c5c15e25e19476dda547a1055a",
+    "commit": "2ee626d3e33f720e0591b874b22b617079ffb60d",
     "name": "hermes-labs",
     "transport": "https",
     "preexisting": false
@@ -19,8 +19,18 @@
       "marketplaces": 0,
       "plugins": 0
     },
-    "marketplaces": [],
-    "plugins": []
+    "marketplaces": [
+      "claude-plugins-official",
+      "intent-verify"
+    ],
+    "plugins": [
+      "frontend-design@claude-plugins-official",
+      "intent-verify@intent-verify",
+      "playwright@claude-plugins-official",
+      "pr-review-toolkit@claude-plugins-official",
+      "pyright-lsp@claude-plugins-official",
+      "swift-lsp@claude-plugins-official"
+    ]
   },
   "finalState": {
     "ok": true,
@@ -28,8 +38,18 @@
       "marketplaces": 0,
       "plugins": 0
     },
-    "marketplaces": [],
-    "plugins": []
+    "marketplaces": [
+      "claude-plugins-official",
+      "intent-verify"
+    ],
+    "plugins": [
+      "frontend-design@claude-plugins-official",
+      "intent-verify@intent-verify",
+      "playwright@claude-plugins-official",
+      "pr-review-toolkit@claude-plugins-official",
+      "pyright-lsp@claude-plugins-official",
+      "swift-lsp@claude-plugins-official"
+    ]
   },
   "restored": true,
   "results": [
@@ -359,14 +379,14 @@
     },
     {
       "id": "little-canary",
-      "version": "0.3.7",
+      "version": "0.3.8",
       "declared": [
         "hook"
       ],
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/little-canary",
-        "commit": "6db9a0ace8083b32200365f67d2ce4c600241e47",
+        "commit": "3851078663b49b751c2cd246ca57eb89d534dc37",
         "path": "plugins/claude-code"
       },
       "observed": {
@@ -1005,14 +1025,14 @@
     },
     {
       "id": "hermes-gate",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "declared": [
         "hook"
       ],
       "compatibility": "verified",
       "source": {
         "repository": "https://github.com/hermes-labs-ai/hermes-gate",
-        "commit": "a09df80d762d866542dc4de4816307e0b952b375",
+        "commit": "3c2c17157a03da65ff8af5d60300e1e10957594c",
         "path": "claude-plugin"
       },
       "observed": {
