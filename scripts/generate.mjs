@@ -81,7 +81,7 @@ const copilotCompatibility = {
     name: plugin.id,
     description: plugin.description,
     version: plugin.version,
-    source: externalSource(plugin, 'claude'),
+    source: externalSource(plugin, plugin.targets.includes('claude') ? 'claude' : 'copilot'),
     category: plugin.category,
     repository: plugin.repository,
     ...(plugin.homepage ? { homepage: plugin.homepage } : {}),

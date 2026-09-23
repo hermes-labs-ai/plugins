@@ -25,9 +25,12 @@ test('migration preserves the two installed marketplace namespaces', () => {
   assert.equal(copilot.name, 'hermes-labs-copilot');
 });
 
-test('the complete legacy inventories are mapped once in catalog.json', () => {
-  assert.equal(catalog.plugins.length, 13);
-  assert.equal(new Set(catalog.plugins.map((plugin) => plugin.id)).size, 13);
+test('the complete host inventories are mapped once per host in catalog.json', () => {
+  assert.equal(catalog.plugins.length, 14);
+  for (const host of ['claude', 'codex', 'copilot']) {
+    const entries = catalog.plugins.filter((plugin) => plugin.targets.includes(host));
+    assert.equal(new Set(entries.map((plugin) => plugin.id)).size, entries.length);
+  }
   assert.equal(claude.plugins.length, 13);
   assert.equal(copilot.plugins.length, 12);
   assert.deepEqual(
@@ -44,14 +47,23 @@ test('every catalog source is immutable and avoids organization SSH dependencies
   for (const plugin of catalog.plugins) {
     assert.match(plugin.source.commit, /^[0-9a-f]{40}$/, plugin.id);
     assert.match(plugin.repository, /^https:\/\/github\.com\/hermes-labs-ai\//, plugin.id);
-    for (const manifest of [claude, codex, copilot]) {
+    for (const [host, manifest] of [['claude', claude], ['codex', codex], ['copilot', copilot]]) {
+      if (!plugin.targets.includes(host)) continue;
       const entry = manifest.plugins.find((candidate) => candidate.name === plugin.id);
-      if (!entry) continue;
+      assert.ok(entry, `${manifest.name}/${plugin.id}`);
       assert.equal(entry.source.sha, plugin.source.commit, `${manifest.name}/${plugin.id}`);
       assert.match(entry.source.url, /^https:\/\//, `${manifest.name}/${plugin.id}`);
       assert.doesNotMatch(entry.source.url, /^(git@|ssh:|git:)/, `${manifest.name}/${plugin.id}`);
     }
   }
+});
+
+test('LintLang keeps its stable name but selects the native Copilot package', () => {
+  const claudeLintlang = claude.plugins.find((plugin) => plugin.name === 'lintlang');
+  const copilotLintlang = copilot.plugins.find((plugin) => plugin.name === 'lintlang');
+  assert.equal(claudeLintlang.source.path, 'integrations/claude-code');
+  assert.equal(copilotLintlang.source.path, 'integrations/copilot-cli');
+  assert.equal(copilotLintlang.version, '0.1.0');
 });
 
 test('the generator is byte-for-byte deterministic', () => {

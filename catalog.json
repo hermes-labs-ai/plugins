@@ -54,8 +54,7 @@
       },
       "targets": [
         "claude",
-        "codex",
-        "copilot"
+        "codex"
       ],
       "capabilities": [
         "skill",
@@ -64,7 +63,30 @@
       "compatibility": {
         "claude": "verified",
         "codex": "listed-unverified",
-        "copilot": "listed-unverified"
+        "copilot": "unsupported"
+      }
+    },
+    {
+      "id": "lintlang",
+      "description": "Audits named agent instructions and tool definitions on demand with the native LintLang skill for GitHub Copilot CLI.",
+      "version": "0.1.0",
+      "category": "development",
+      "repository": "https://github.com/hermes-labs-ai/lintlang",
+      "source": {
+        "path": "integrations/copilot-cli",
+        "ref": "main",
+        "commit": "e06d2a57d7ae474ac9cc42b530aeb1e7f13d2a65"
+      },
+      "targets": [
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
+      "compatibility": {
+        "claude": "unsupported",
+        "codex": "unsupported",
+        "copilot": "verified"
       }
     },
     {
