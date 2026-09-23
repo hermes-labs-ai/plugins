@@ -18,16 +18,18 @@ check(catalog.catalog?.namespaces?.claude === 'hermes-labs', 'Claude namespace m
 check(catalog.catalog?.namespaces?.codex === 'hermes-labs', 'Codex namespace must remain hermes-labs');
 check(catalog.catalog?.namespaces?.copilot === 'hermes-labs-copilot', 'Copilot namespace must remain hermes-labs-copilot');
 
-const ids = new Set();
+const idsByHost = Object.fromEntries(['claude', 'codex', 'copilot'].map((host) => [host, new Set()]));
 for (const plugin of catalog.plugins) {
   check(/^[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(plugin.id), `${plugin.id}: invalid id`);
-  check(!ids.has(plugin.id), `${plugin.id}: duplicate id`);
-  ids.add(plugin.id);
   check(/^https:\/\/github\.com\/hermes-labs-ai\/[A-Za-z0-9_.-]+$/.test(plugin.repository), `${plugin.id}: invalid repository`);
   check(/^[0-9a-f]{40}$/.test(plugin.source?.commit ?? ''), `${plugin.id}: commit must be a full SHA`);
   check(typeof plugin.source?.path === 'string' && plugin.source.path.length > 0, `${plugin.id}: source.path is required`);
   check(Array.isArray(plugin.targets) && plugin.targets.length > 0, `${plugin.id}: targets are required`);
   check(new Set(plugin.targets).size === plugin.targets.length, `${plugin.id}: duplicate target`);
+  for (const host of plugin.targets) {
+    check(!idsByHost[host]?.has(plugin.id), `${plugin.id}: duplicate ${host} id`);
+    idsByHost[host]?.add(plugin.id);
+  }
   for (const host of ['claude', 'codex', 'copilot']) {
     const status = plugin.compatibility?.[host];
     check(['verified', 'listed-unverified', 'unsupported'].includes(status), `${plugin.id}: invalid ${host} compatibility`);
@@ -152,9 +154,12 @@ check(generate.status === 0, `generate.mjs failed: ${generate.stderr.trim()}`);
 
 if (network) {
   for (const plugin of catalog.plugins) {
-    const manifestPath = plugin.source.path === '.'
+    const manifestName = plugin.targets.includes('claude')
       ? '.claude-plugin/plugin.json'
-      : `${plugin.source.path}/.claude-plugin/plugin.json`;
+      : 'plugin.json';
+    const manifestPath = plugin.source.path === '.'
+      ? manifestName
+      : `${plugin.source.path}/${manifestName}`;
     const slug = new URL(plugin.repository).pathname.replace(/^\//, '');
     const url = `https://raw.githubusercontent.com/${slug}/${plugin.source.commit}/${manifestPath}`;
     let response;

@@ -65,6 +65,12 @@ The catalog records capability type and compatibility separately:
   completed runtime certification.
 - `unsupported` keeps the entry out of that host manifest.
 
+When a product needs different native package roots on different hosts, the
+catalog can use separate rows with the same plugin ID and disjoint targets.
+LintLang keeps the `lintlang` install name while Claude Code and Copilot CLI
+resolve to their respective integration directories; no product files are
+copied into this catalog.
+
 A loaded skill does not prove that an MCP server connected. A connected MCP
 server does not prove that a hook intercepted an event. An input-screening
 hook does not block arbitrary output tool execution.
