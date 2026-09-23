@@ -71,6 +71,11 @@ LintLang keeps the `lintlang` install name while Claude Code and Copilot CLI
 resolve to their respective integration directories; no product files are
 copied into this catalog.
 
+Agent Trash Guard keeps the existing `claude-trash-guard` Claude install name.
+Copilot CLI installs `agent-trash-guard@hermes-labs-copilot` from the product
+repository's root Agent Plugins bundle, which includes its native Copilot hook
+and recoverable-deletion skill. The Claude hook is not used as a Copilot hook.
+
 A loaded skill does not prove that an MCP server connected. A connected MCP
 server does not prove that a hook intercepted an event. An input-screening
 hook does not block arbitrary output tool execution.
