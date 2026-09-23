@@ -110,11 +110,13 @@ the other two:
 |---|---|---|
 | Claude Code | yes | `evidence/pilot-proof-claude.json`, enforced by `verify` |
 | Codex | no | earlier manual checks, not receipt-backed and not gated |
-| GitHub Copilot CLI | no | no entry currently claims `verified` |
+| GitHub Copilot CLI | no | direct CLI plugin and skill readback for verified skill entries; the pilot-proof pack does not yet automate this |
 
-Codex and Copilot install the same pinned sources, but neither CLI exposes a
-component inventory readback, so `pilot-proof.mjs` refuses those hosts rather
-than certify a lifecycle and imply capability evidence. The five Codex
+Codex and Copilot install the same pinned sources, but neither host has the
+complete component inventory readback required by `pilot-proof.mjs`. Copilot's
+`skill list` can verify an installed skill, but it does not certify a hook.
+The pilot-proof pack refuses those hosts rather than imply evidence for every
+declared capability. The five Codex
 `verified` entries predate this pack; they are not downgraded here because that
 would assert a negative the pack cannot demonstrate either. Extending coverage
 means adding a host to `CERTIFIED_HOSTS` once a readback exists.
