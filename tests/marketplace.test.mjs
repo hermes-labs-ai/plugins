@@ -126,6 +126,23 @@ test('hermes-blind exercises portable skill generation', () => {
   assert.equal(plugin.source.path, 'claude-plugin');
 });
 
+test('Hermes Gate remains pinned and listed-unverified for Codex', () => {
+  const plugin = catalog.plugins.find((candidate) => candidate.id === 'hermes-gate');
+  assert.equal(plugin.version, '0.1.7');
+  assert.deepEqual(plugin.source, {
+    path: 'claude-plugin',
+    ref: 'v0.1.7',
+    commit: '3c2c17157a03da65ff8af5d60300e1e10957594c',
+  });
+  assert.deepEqual(plugin.targets, ['claude', 'codex', 'copilot']);
+  assert.equal(plugin.compatibility.codex, 'listed-unverified');
+  const entry = codex.plugins.find((candidate) => candidate.name === plugin.id);
+  assert.ok(entry);
+  assert.equal(entry.version, '0.1.7');
+  assert.equal(entry.source.sha, plugin.source.commit);
+  assert.equal(entry.source.path, 'claude-plugin');
+});
+
 test('Trash Guard selects its native Copilot package while preserving the Claude install', () => {
   const claudePlugin = catalog.plugins.find((candidate) => candidate.id === 'claude-trash-guard');
   const copilotPlugin = catalog.plugins.find((candidate) => candidate.id === 'agent-trash-guard');

@@ -425,6 +425,7 @@
       },
       "targets": [
         "claude",
+        "codex",
         "copilot"
       ],
       "capabilities": [
@@ -432,7 +433,7 @@
       ],
       "compatibility": {
         "claude": "verified",
-        "codex": "unsupported",
+        "codex": "listed-unverified",
         "copilot": "listed-unverified"
       }
     }
