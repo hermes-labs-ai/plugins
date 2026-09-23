@@ -76,6 +76,10 @@ Copilot CLI installs `agent-trash-guard@hermes-labs-copilot` from the product
 repository's root Agent Plugins bundle, which includes its native Copilot hook
 and recoverable-deletion skill. The Claude hook is not used as a Copilot hook.
 
+Agent Signage also keeps one install name across hosts. Copilot CLI resolves
+`agent-signage` to its native post-tool hook package, which adds context after
+supported file operations; Claude Code keeps its existing pre-tool bundle.
+
 A loaded skill does not prove that an MCP server connected. A connected MCP
 server does not prove that a hook intercepted an event. An input-screening
 hook does not block arbitrary output tool execution.

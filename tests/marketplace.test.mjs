@@ -26,7 +26,7 @@ test('migration preserves the two installed marketplace namespaces', () => {
 });
 
 test('the complete host inventories are mapped once per host in catalog.json', () => {
-  assert.equal(catalog.plugins.length, 16);
+  assert.equal(catalog.plugins.length, 17);
   for (const host of ['claude', 'codex', 'copilot']) {
     const entries = catalog.plugins.filter((plugin) => plugin.targets.includes(host));
     assert.equal(new Set(entries.map((plugin) => plugin.id)).size, entries.length);
@@ -64,6 +64,14 @@ test('LintLang keeps its stable name but selects the native Copilot package', ()
   assert.equal(claudeLintlang.source.path, 'integrations/claude-code');
   assert.equal(copilotLintlang.source.path, 'integrations/copilot-cli');
   assert.equal(copilotLintlang.version, '0.1.0');
+});
+
+test('Agent Signage selects the native Copilot hook without moving its Claude bundle', () => {
+  const claudeSignage = claude.plugins.find((plugin) => plugin.name === 'agent-signage');
+  const copilotSignage = copilot.plugins.find((plugin) => plugin.name === 'agent-signage');
+  assert.equal(claudeSignage.source.path, 'claude-plugin');
+  assert.equal(copilotSignage.source.path, 'integrations/copilot-cli');
+  assert.equal(copilotSignage.version, '0.2.1');
 });
 
 test('the generator is byte-for-byte deterministic', () => {

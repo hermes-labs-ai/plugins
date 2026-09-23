@@ -93,14 +93,14 @@
     },
     {
       "name": "agent-signage",
-      "description": "Reports actionable git-state facts before file operations when a checkout is behind its upstream.",
+      "description": "Adds concise repo-state context after supported file operations in GitHub Copilot CLI.",
       "version": "0.2.1",
       "source": {
         "source": "url",
         "url": "https://github.com/hermes-labs-ai/agent-signage.git",
         "ref": "main",
-        "sha": "7cf8c0b440eff548c8d378313981475e5e89e902",
-        "path": "claude-plugin"
+        "sha": "cd018cfd0c770b070df2efe5033686264764d516",
+        "path": "integrations/copilot-cli"
       },
       "category": "development",
       "repository": "https://github.com/hermes-labs-ai/agent-signage",

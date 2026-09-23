@@ -245,14 +245,37 @@
         "commit": "7cf8c0b440eff548c8d378313981475e5e89e902"
       },
       "targets": [
-        "claude",
-        "copilot"
+        "claude"
       ],
       "capabilities": [
         "hook"
       ],
       "compatibility": {
         "claude": "verified",
+        "codex": "unsupported",
+        "copilot": "unsupported"
+      }
+    },
+    {
+      "id": "agent-signage",
+      "description": "Adds concise repo-state context after supported file operations in GitHub Copilot CLI.",
+      "version": "0.2.1",
+      "category": "development",
+      "repository": "https://github.com/hermes-labs-ai/agent-signage",
+      "homepage": "https://github.com/hermes-labs-ai/agent-signage",
+      "source": {
+        "path": "integrations/copilot-cli",
+        "ref": "main",
+        "commit": "cd018cfd0c770b070df2efe5033686264764d516"
+      },
+      "targets": [
+        "copilot"
+      ],
+      "capabilities": [
+        "hook"
+      ],
+      "compatibility": {
+        "claude": "unsupported",
         "codex": "unsupported",
         "copilot": "listed-unverified"
       }
