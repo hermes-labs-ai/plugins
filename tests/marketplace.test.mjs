@@ -26,7 +26,7 @@ test('migration preserves the two installed marketplace namespaces', () => {
 });
 
 test('the complete host inventories are mapped once per host in catalog.json', () => {
-  assert.equal(catalog.plugins.length, 15);
+  assert.equal(catalog.plugins.length, 16);
   for (const host of ['claude', 'codex', 'copilot']) {
     const entries = catalog.plugins.filter((plugin) => plugin.targets.includes(host));
     assert.equal(new Set(entries.map((plugin) => plugin.id)).size, entries.length);
@@ -118,12 +118,15 @@ test('hermes-blind exercises portable skill generation', () => {
   assert.equal(plugin.source.path, 'claude-plugin');
 });
 
-test('claude-trash-guard remains a host hook, not a portable Codex claim', () => {
-  const plugin = catalog.plugins.find((candidate) => candidate.id === 'claude-trash-guard');
-  assert.deepEqual(plugin.capabilities, ['hook']);
-  assert.deepEqual(plugin.targets, ['claude', 'copilot']);
-  assert.equal(plugin.compatibility.codex, 'unsupported');
-  assert.equal(codex.plugins.some((candidate) => candidate.name === plugin.id), false);
+test('Trash Guard selects its native Copilot package while preserving the Claude install', () => {
+  const claudePlugin = catalog.plugins.find((candidate) => candidate.id === 'claude-trash-guard');
+  const copilotPlugin = catalog.plugins.find((candidate) => candidate.id === 'agent-trash-guard');
+  assert.deepEqual(claudePlugin.targets, ['claude']);
+  assert.deepEqual(copilotPlugin.targets, ['copilot']);
+  assert.equal(claude.plugins.find((candidate) => candidate.name === claudePlugin.id).source.path, 'integrations/claude');
+  assert.equal(copilot.plugins.find((candidate) => candidate.name === copilotPlugin.id).source.path, undefined);
+  assert.deepEqual(copilotPlugin.capabilities, ['skill', 'hook']);
+  assert.equal(codex.plugins.some((candidate) => candidate.name === copilotPlugin.id), false);
 });
 
 test('Copilot native manifest cannot be shadowed by a higher-precedence root path', async () => {

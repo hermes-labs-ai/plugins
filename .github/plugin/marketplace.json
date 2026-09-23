@@ -79,15 +79,14 @@
       "repository": "https://github.com/hermes-labs-ai/little-canary"
     },
     {
-      "name": "claude-trash-guard",
-      "description": "Blocks permanent-delete shell commands and redirects the agent to a recoverable trash workflow.",
+      "name": "agent-trash-guard",
+      "description": "Adds a recoverable deletion skill and a native Copilot pre-tool shell deletion guard.",
       "version": "0.1.3",
       "source": {
         "source": "url",
         "url": "https://github.com/hermes-labs-ai/agent-trash-guard.git",
         "ref": "main",
-        "sha": "284b128add086cdfadd0e4a19919da4b75253eb6",
-        "path": "integrations/claude"
+        "sha": "45b6c16837756d28e3eb006f857212ddf18afca1"
       },
       "category": "development",
       "repository": "https://github.com/hermes-labs-ai/agent-trash-guard"
