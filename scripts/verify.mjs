@@ -37,7 +37,7 @@ for (const plugin of catalog.plugins) {
   }
 }
 
-const expectedCounts = { claude: 13, copilot: 12 };
+const expectedCounts = { claude: 13, copilot: 13 };
 for (const [host, expected] of Object.entries(expectedCounts)) {
   check(pluginsFor(catalog, host).length === expected, `${host}: expected preserved inventory of ${expected}`);
 }

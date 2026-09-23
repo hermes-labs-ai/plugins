@@ -52,6 +52,19 @@
       "repository": "https://github.com/hermes-labs-ai/rule-audit"
     },
     {
+      "name": "hermes-rubric",
+      "description": "Assesses named artifacts with evidence-cited Hermes Rubric guidance and explicit coverage limits.",
+      "version": "1.2.3",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hermes-labs-ai/hermes-rubric.git",
+        "ref": "main",
+        "sha": "e242e3dd7faf70e43ced592976b227bd1e947c02"
+      },
+      "category": "developer-tools",
+      "repository": "https://github.com/hermes-labs-ai/hermes-rubric"
+    },
+    {
       "name": "little-canary",
       "description": "Screens inbound prompts through a local Little Canary service before the host sends them to the main model.",
       "version": "0.3.8",

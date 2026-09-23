@@ -116,6 +116,29 @@
       }
     },
     {
+      "id": "hermes-rubric",
+      "description": "Assesses named artifacts with evidence-cited Hermes Rubric guidance and explicit coverage limits.",
+      "version": "1.2.3",
+      "category": "developer-tools",
+      "repository": "https://github.com/hermes-labs-ai/hermes-rubric",
+      "source": {
+        "path": ".",
+        "ref": "main",
+        "commit": "e242e3dd7faf70e43ced592976b227bd1e947c02"
+      },
+      "targets": [
+        "copilot"
+      ],
+      "capabilities": [
+        "skill"
+      ],
+      "compatibility": {
+        "claude": "unsupported",
+        "codex": "unsupported",
+        "copilot": "verified"
+      }
+    },
+    {
       "id": "hermeneutic-gate",
       "description": "Legacy advisory Stop-hook bundle for the fixed English gate, with Claude Stop compatibility certified in v0.1.7.",
       "version": "0.1.7",
