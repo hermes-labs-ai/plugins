@@ -39,6 +39,13 @@ codex plugin marketplace add hermes-labs-ai/plugins
 codex plugin add hermes-blind@hermes-labs
 ```
 
+Hermes Gate is available through this marketplace as a listed, unverified
+Codex plugin. Its marketplace entry installs the pinned portable bundle; it
+does not certify that Codex loads or executes its hooks. The separate
+`pip install hermes-gate` followed by `hermes-gate install-codex` route configures
+Codex hooks directly. Choose one route per Codex home: installing both can
+register the same behavior twice.
+
 GitHub Copilot CLI:
 
 ```bash
