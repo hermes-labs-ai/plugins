@@ -78,7 +78,7 @@ uvx --from fidelis-memory==0.3.0rc1 fidelis mcp serve
 
 `uvx` is included with [uv](https://docs.astral.sh/uv/). It must be visible on the PATH inherited by Antigravity; use its absolute executable path if your desktop session does not inherit your shell PATH.
 
-The bridge also needs the existing local Fidelis service. Retrieval and ingestion require Ollama with `nomic-embed-text` available. On a fresh macOS or Linux installation, follow [Fidelis setup](https://github.com/hermes-labs-ai/fidelis#quick-start); keep an existing service and memory store in place when adding another client. The default service port is `19420`; if you use a different port, set `FIDELIS_PORT` consistently for the service and its MCP client.
+The bridge also needs the existing local Fidelis service. Retrieval and ingestion require Ollama with `nomic-embed-text` available. On a fresh macOS or Linux installation, follow [Fidelis setup](https://github.com/hermes-labs-ai/fidelis#try-it-with-one-note); keep an existing service and memory store in place when adding another client. The default service port is `19420`; if you use a different port, set `FIDELIS_PORT` consistently for the service and its MCP client.
 
 In Antigravity's `mcp_config.json`, merge this entry into the existing `mcpServers` object; preserve other servers. If the Gemini import already created a `fidelis` entry, use that entry rather than registering it again.
 
